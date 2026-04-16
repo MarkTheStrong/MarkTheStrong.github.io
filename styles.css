@@ -242,7 +242,7 @@ img, .option-image img, .popup-content img {
     min-height: 120px;
     max-width: 40vw;
     max-height: 40vw;
-    background: url('Images/tent.png') no-repeat center 45%;
+    background: url('/tent.png') no-repeat center 45%;
     background-size: 8% auto;
     transform: translate(-50%, -50%) translateZ(-100px) scale(3);
     z-index: 0;
@@ -308,13 +308,13 @@ img, .option-image img, .popup-content img {
 }
 
 .tree-left {
-    background-image: url('Images/tree.png');
+    background-image: url('/tree.png');
     transform: translateX(0%) translateZ(-200px);
     
 }
 
 .tree-right {
-    background-image: url('Images/tree.png');
+    background-image: url('/tree.png');
     transform: translateX(0%) translateZ(-200px) scaleX(-1); 
 }
 /* both trees start at edge (0%) */
@@ -350,11 +350,11 @@ img, .option-image img, .popup-content img {
     background-position: center;
     z-index: 1000;
     display: block;
-    background-image: url('Images/frog.png');
+    background-image: url('/frog.png');
 }
 
 .mushroom {
-    background-image: url('Images/mush.png');
+    background-image: url('/mush.png');
     left: 52%;
     top: 62%;
 }
@@ -394,21 +394,21 @@ img, .option-image img, .popup-content img {
 }
 
 .left-star {
-    background-image: url('Images/star.png');
+    background-image: url('/star.png');
     left: 20%; 
     top: 10%; 
     transform: translateZ(-150px);
 }
 
 .center-star {
-    background-image: url('Images/firefly.png');
+    background-image: url('/firefly.png');
     left: 50%;
     top: 5%; /* Moved much higher */
     transform: translateX(-50%) translateZ(-150px);
 }
 
 .right-star {
-    background-image: url('Images/star.png');
+    background-image: url('/star.png');
     left: 80%; 
     top: 10%; 
     transform: translateZ(-150px);
@@ -944,7 +944,7 @@ body.about-page, .about-page .main-container {
     right: -1px;
     width: 100px;
     height: 100px;
-    background-image: url('Images/frog.png');
+    background-image: url('/frog.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

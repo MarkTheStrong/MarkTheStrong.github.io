@@ -13,7 +13,7 @@ Its my take on a parallax scroll where you go into the tent. IT has a home page 
 
 ## PAGES
 
-1. **Homepage (main.html)**
+1. **Homepage (index.html)**
     + Parallax scroll
     + Features all the pages as options 
 2. **About page (aboutMe.html)**

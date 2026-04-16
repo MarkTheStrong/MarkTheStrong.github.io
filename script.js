@@ -21,7 +21,7 @@
 // ------Constants-------
 
 const PAGE_ORDER = [
-    'main.html',
+    'index.html',
     'aboutMe.html',
     'repository.html',
     'contactMe.html'
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
 
                 const rawPath = window.location.pathname.split('/').pop();
-                const currentPage= (rawPath && rawPath.includes('.html')) ? rawPath : 'main.html';
+                const currentPage= (rawPath && rawPath.includes('.html')) ? rawPath : 'index.html';
 
                 const targetUrl = href.split('/').pop();
                 const direction = getNavigationDirection(currentPage, targetUrl);
@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     burger.classList.remove('open');
                     document.body.style.overflow = '';
 
-                    const currentPage = window.location.pathname.split('/').pop() || 'main.html';
+                    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
                     const targetUrl = href.split('/').pop();
                     const direction = getNavigationDirection(currentPage, targetUrl);
 
