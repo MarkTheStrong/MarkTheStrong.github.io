@@ -184,6 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const href = this.getAttribute('href');
                 if (!href || href.startsWith('#')) return; 
                     // Skip processing if the link is an anchor link (starts with #)
+                if (href.startsWith('http') || this.getAttribute('target') === '_blank') return;
                 
                 e.preventDefault(); 
 
