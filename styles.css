@@ -1,0 +1,2142 @@
+/* -----Table of Contents----- */
+/* 
+    1. Reset and Base
+    2. Navbar
+    3. Parallax System
+        a) parallax container
+        b) background (tent)
+        c) background (trees)
+        d) background (dec: frog & mushroom)
+        e) background (stars)
+    4. welcome section
+        a) scroll indicator
+    5. Options
+    6. GIF section (no gif added but im thinking about it hehe)
+    7. Animation and Keyframes
+    8. Mobile Menu (burgers) (working on it)
+    9. About page
+        a) Layout and NavBar
+        b) trees
+        c) content cubes and sections
+        d) popup boxes
+        e) responsive breakpoints
+        f) font changes and styling
+    10. Repository page
+        a) layout and navBar
+        b) grid and content cubes
+        c) page cube and content
+    11. Contact page
+        a) layout and navBar
+        b) trees
+        c) content cubes and sections
+        d) contact form
+        e) thank you message
+        f) responsive breakpoints
+    12. Page transitions
+    13. Sharged page styles (page-background, page-cube, page-section)
+    14. Accessibility and touch options
+    15. Image lightbox-overlay system
+------------------------------------------------------------------*/
+
+/* ---------0. Fonts------------ */
+@font-face{
+    font-family: 'FelixTitling';
+    src: url('fonts/felixtitlingmt.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* -----1. Reset and Base----- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    /* font-family: 'Times New Roman', Times, serif; */
+    font-family: 'FelixTitling';
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    padding-top: 0;
+    background-color: var(--color-tan);
+    position: relative;
+    margin: 0;
+    min-height: 100vh;
+}
+.main-container {
+    position: relative;
+    min-height: 200vh;
+    z-index: 1;
+}
+
+img, .option-image img, .popup-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+    }
+/* this ensures images are responsive */
+
+
+/* -----2. Navbar----- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: var(--color-tan-glass);
+    box-shadow: var(--shadow-soft);
+    position: fixed;
+    width: 100%;
+    top: -100px;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    transition: top 0.5s ease;
+}
+/* navbar styling - starts hidden (top) */
+/* Show navbar when scrolling down (done with JS) */
+.navbar.visible {
+    top: 0;
+}
+
+
+.profpic {
+    display: flex;
+    align-items: center;
+}
+
+.profpic img {
+    width: clamp(30px, 5vw, 60px); 
+    height: clamp(30px, 5vw, 60px);
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.profpic-name{
+    font-size: clamp(.9rem, 1.5vw, 1.5rem);
+    margin-left: 10px;
+    font-weight: bold;
+    transition: all 0.5s ease;
+}
+
+
+.navbar.visible .profpic {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* for other pages this shows profpic (picture) constantly */
+
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+/* navigation styling links */
+
+/* indiv items on nave links */
+.nav-links li {
+    margin-left: 2rem;
+    opacity: 1; 
+    transform: translateY(0); 
+    transition: all 0.5s ease;
+}
+.navbar.visible .nav-links li {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* show nav links mainly used for other pages not main page */
+
+
+.nav-links li:nth-child(1) { transition-delay: 0.1s; }
+.nav-links li:nth-child(2) { transition-delay: 0.2s; }
+.nav-links li:nth-child(3) { transition-delay: 0.3s; }
+.nav-links li:nth-child(4) { transition-delay: 0.4s; }
+/* delay for each nav link */
+
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-text);;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+/* nav link styling */
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--color-text);;;
+    transition: width 0.3s ease;
+}
+.nav-links a:hover::after {
+    width: 100%;
+}
+.nav-links a:hover {
+    color: var(--color-nav-text);
+    transform: translateY(-2px);
+}
+/* the line under the links when hovering  */
+
+
+
+
+.nav-links a.active {
+    color: var(--color-text-active);
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-text-active);
+    padding-bottom: 2px;
+    
+    
+}
+.nav-links a.active::after {
+    display:none;
+}
+/* removes the line under the active link */
+
+/* -----3a) Parallax container----- */
+.parallax-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    perspective: 2000px;
+    transform-style: preserve-3d;
+    perspective-origin: 50% 30%;
+    z-index: 0;
+    transition: transform 0.5s ease;
+    transform: translateX(0);
+    visibility: visible;
+}
+
+.parallax-container.slide-left {
+    transform: translateX(-100%);
+}
+
+
+.parallax-container:not(.slide-left) {
+    transform: translateX(0);
+    visibility: visible;
+}
+
+/* -----3b) background (tent)----- */
+.parallax-bg {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    width: 20vw;
+    height: 20vw;
+    min-width: 120px;
+    min-height: 120px;
+    max-width: 40vw;
+    max-height: 40vw;
+    background: url('Images/tent.png') no-repeat center 45%;
+    background-size: 8% auto;
+    transform: translate(-50%, -50%) translateZ(-100px) scale(3);
+    z-index: 0;
+    transform-origin: center center;
+    will-change: transform;
+    background-size: 10vw auto !important;
+}
+
+
+/* this is for mobile devices */
+@media (max-width: 700px)  {
+    .parallax-bg {
+        top: 35% !important;
+    }
+    .parallax-bg
+    .option-text {
+        font-size: 1.5rem !important;
+        
+    }
+    .options-items {
+        gap: 1.5rem !important;
+    }
+    .parallax-bg{
+        background-size: 15vw auto !important;
+    }
+    .scroll-indicator {
+        font-size: 1rem !important;
+        bottom: 150px !important;    
+    }
+    
+
+
+}
+
+/* -------------3c) trees-------------- */
+.parallax-trees {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    z-index: 0;
+    will-change: transform;
+    transform-style: preserve-3d;
+    transform-origin: center 30%;
+}
+
+.tree-left, .tree-right {
+    width: 30vw;
+    height: 100vh;
+    min-width: 120px;
+    max-width: 50vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform-origin: center 30%;
+    will-change: transform;
+    transform-style: preserve-3d;
+}
+
+.tree-left {
+    background-image: url('Images/tree.png');
+    transform: translateX(0%) translateZ(-200px);
+    
+}
+
+.tree-right {
+    background-image: url('Images/tree.png');
+    transform: translateX(0%) translateZ(-200px) scaleX(-1); 
+}
+/* both trees start at edge (0%) */
+
+
+/* -----3d) decorations (frogs and mushrooms)----- */
+
+.parallax-decorations {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    z-index: 0;
+    will-change: transform;
+    transform-style: preserve-3d;
+    transform-origin: center 30%;
+}
+
+.frog, .mushroom {
+    position: absolute;
+    left: 40%;
+    top: 62%;
+    width: 10vw;
+    height: 10vw;
+    min-width: 48px;
+    min-height: 48px;
+    max-width: 14vw;
+    max-height: 14vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1000;
+    display: block;
+    background-image: url('Images/frog.png');
+}
+
+.mushroom {
+    background-image: url('Images/mush.png');
+    left: 52%;
+    top: 62%;
+}
+
+
+/* -----------------3e) top stars----------------- */
+.parallax-top-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 10%;
+    z-index: 0;
+    will-change: transform;
+    transform-style: preserve-3d;
+    transform-origin: center 30%;
+}
+
+.top-star {
+    width: 7vw;
+    height: 7vw;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 12vw;
+    max-height: 12vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform-origin: center center;
+    will-change: transform;
+    transform-style: preserve-3d;
+    position: absolute;
+}
+
+.left-star {
+    background-image: url('Images/star.png');
+    left: 20%; 
+    top: 10%; 
+    transform: translateZ(-150px);
+}
+
+.center-star {
+    background-image: url('Images/firefly.png');
+    left: 50%;
+    top: 5%; /* Moved much higher */
+    transform: translateX(-50%) translateZ(-150px);
+}
+
+.right-star {
+    background-image: url('Images/star.png');
+    left: 80%; 
+    top: 10%; 
+    transform: translateZ(-150px);
+}
+/* 80 and 20 for left and right to make them even distance from edges */
+
+/* -----------------4) Welcome section----------------- */
+.welcome-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--color-text-light);
+    position: relative;
+    z-index: 2;
+    text-shadow: var(--popup-shadow-h);
+}
+.welcome-section h1 {
+    -webkit-text-stroke:0.5px currentColor;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-out;
+    text-shadow: 2px 2px 4px var(--overlay-dark);
+}
+
+.welcome-section p {
+    font-family: Garmond, serif;
+    font-size: 1rem;
+    animation: fadeInUp 1s ease-out 0.5s backwards;
+    text-shadow: 1px 1px 2px var(--overlay-dark);
+}
+
+/* -------------4a) scroll indicator------------- */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-text-light);
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 4px var(--overlay-darker);
+    animation: bounce 2s infinite;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* -------------5) Options section ------------- */
+
+.options-list {
+    position: fixed;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    width: 90%;
+    max-width: 800px;
+}
+
+.options-list.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+.options-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.option-item {
+    margin: -0.5rem 0;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.options-list.visible .option-item {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.option-item:nth-child(1) { transition-delay: 0.2s; }
+.option-item:nth-child(2) { transition-delay: 0.4s; }
+.option-item:nth-child(3) { transition-delay: 0.6s; }
+
+.option-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-text-light);
+    padding: 0.2rem 2rem;
+    transition: all 0.3s ease;
+    gap: 0.1 rem;
+}
+
+.option-link:hover {
+    transform: translateX(20px);
+    }
+
+.option-image {
+    width: 10vw;
+    max-width: 100px;
+    min-width: 32px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+.option-image img {
+    width: 100%;
+    height: auto;
+    max-width: 10vw;
+    min-width: 32px;
+    display: block;
+}
+
+.option-link:hover .option-image {
+    transform: scale(1.1);
+    }
+
+.option-text {
+    font-size: 2.5rem;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px var(--overlay-dark);
+}
+
+@media (max-width: 768px) {
+    .parallax-bg {
+        top:40%;
+    }
+    .options-content {
+    flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .options-image {
+        max-width: 100%;
+    }
+    
+    .options-list {
+        left: 50%;
+    }
+    
+    .option-image {
+        width: 40px;
+        height: 40px;
+}
+
+    .option-text {
+    font-size: 2rem;
+    }
+    
+    .option-link {
+        gap: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+/* -------------6) Gif section (working on it?) ------------- */
+
+/* GIF section styling no gif added but thinking about it */
+.gif-section {
+    min-height: 80vh;
+    background: none !important;
+    backdrop-filter: blur(0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    transition: none;
+}
+
+.gif-section.visible {
+    background: none !important;
+}
+
+.gif-container {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease;
+}
+
+/* shows when needed */
+.gif-section.visible .gif-container {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* if needed to move one */
+.moving-gif {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+}
+
+
+
+/* -------------7) Animation and Keyframes ------------- */
+
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    40% {
+        transform: translateY(-20px) translateX(-50%);
+    }
+    60% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+    
+}
+/* scroll indicator animated bounce section */
+
+
+@keyframes drawIn {
+    /* drawIn animation but for the cubes need to edit. */
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(50px);
+        clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.9) translateY(25px);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+}
+
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes trackRetract {
+    0% {
+        height: var(--track-length);
+        opacity: 1;
+        transform: rotate(var(--angle));
+    }
+    100% {
+        height: 0;
+        opacity: 0;
+        transform: rotate(var(--angle)) scale(0);
+    }
+}
+
+/* ------------8) Mobile menu (aka burger menu) ------------- */
+
+
+.burger {
+    display: none;
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    background:none;
+    padding:0.5rem;
+    z-index: 1100;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text);;
+    
+    transition: all 0.3s ease;
+    transform-origin: center;
+
+}
+.burger.open div:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+}
+.burger.open div:nth-child(2) {
+    transform:scaleX(0);
+    opacity: 0;
+}
+.burger.open div:nth-child(3) {
+    transform: rotate(-45deg) translate(-8px);
+}
+
+.mobile-nav{
+    display: none;
+    position:fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-tan-glass-solid);
+    backdrop-filter: blur(10px);
+    z-index: 999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0rem;
+    opacity: 0;
+    visibility: hidden;
+    transition:opacity 0.3s ease, visibility 0.3s ease;
+}
+.mobile-nav.open {
+    opacity: 1;
+    visibility: visible;
+}
+.mobile-nav a {
+    text-decoration: none;
+    color: var(--color-text);;
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 1.2rem 2rem;
+    transition: color 0.3s ease,transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+.mobile-nav.open a {
+    opacity: 1;
+    transform: translateY(0);
+
+}
+.mobile-nav a:nth-child(1) { transition-delay: 0.1s; }
+.mobile-nav a:nth-child(2) { transition-delay: 0.2s; }
+.mobile-nav a:nth-child(3) { transition-delay: 0.3s; }
+.mobile-nav a:nth-child(4) { transition-delay: 0.4s; }
+
+
+.mobile-nav a:hover {
+    color: var(--color-text);;;
+    transform: scale(1.1);
+}
+.mobile-nav a.active {
+    color: #253442;;
+}
+@media (max-width: 768px) {
+    .burger {
+        display: flex;
+    }
+    .nav-links {
+        display: none;
+    }
+    .mobile-nav {
+        display: flex;
+    }
+}
+
+
+/* -----------9) AboutMe Page ------------- */
+
+/* -------------9a) Layout and Navbar ------------- */
+body.about-page, .about-page .main-container {
+    height: 100vh !important;
+    min-height: 100vh;
+    overflow: hidden !important;
+}
+
+.about-page .navbar {
+    top: 0 !important;
+    background-color: var(--color-tan-glass);
+    backdrop-filter: blur(10px);
+}
+
+.about-page .main-container {
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* ------------9b) Trees ------------ */
+
+
+.about-page .parallax-trees {
+    display: flex  !important;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    pointer-events: none;
+    justify-content: space-between;
+    /* align-items: stretch; */
+}
+
+.about-page .tree-left, .about-page .tree-right {
+    position: absolute !important;
+    top: 0 !important;
+    width: 30vw !important; 
+    height: 100vh !important; 
+    min-width: 300px !important; 
+    max-width: 50vw !important; 
+    opacity: 1 !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+    transform: scale(1.5) !important;
+    background-position: center !important; 
+    background-repeat: no-repeat !important; 
+    transform-origin: center 30% !important;
+    
+    
+}
+
+
+/*this part mark*****  */
+.about-page .tree-left {
+    left: -100px !important;
+    /* moves towards center */
+    /* transform: translateZ(-200px) !important; */
+    
+}
+
+.about-page .tree-right {
+    right: -100px !important; 
+    /* transform: translateZ(-200px) scaleX(-1) !important; */
+}
+
+
+/* -------------10c) Content cubes and Sections ------------- */
+.about-page .page-cube, .about-cube {
+    overflow-y: visible !important;
+    max-height: 85vh !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 12vh auto 0 auto !important;
+}
+
+.about-cube {
+    max-width: 1000px;
+    width: 100%;
+    background: var(--theme-cubes);
+    padding: 10rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.5s ease;
+    clip-path: none !important;
+}
+
+
+
+.about-cube.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+/*  */
+.about-page .page-cube {
+    position: relative;
+}
+
+
+
+.about-page .bottom-right-image {
+    position: absolute;
+    bottom: -23px;
+    right: -1px;
+    width: 100px;
+    height: 100px;
+    background-image: url('Images/frog.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 4;
+    pointer-events: none;
+}
+/* adds bottom right image to the cube box aka little froggy */
+
+
+
+/* -------------9d) Popup Box ------------- */
+
+.about-page .page-section h2, .repos-page .page-section h2 {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+/* make h2s clickable for about me */
+
+.page-section h2:hover {
+    color: var(--color-text);;;
+}
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    background: var(--overlay-dark);
+    backdrop-filter: blur(3px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-box {
+    position: fixed;
+    background: var(--color-tan-popup);
+    padding: 3rem; 
+    border-radius: 20px; 
+    box-shadow: var(--shadow-card);
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    width: 1000px; 
+    max-width: 100%; 
+    backdrop-filter: blur(8px);
+    box-sizing: border-box;
+    
+    transform: translate(-50%, -50%) !important;
+    box-sizing: border-box;
+}
+
+
+.popup-box.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.popup-content {
+    color: var(--color-text);;
+}
+
+.popup-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);;
+    text-shadow: var(--popup-shadow-h);
+}
+
+.popup-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text);;
+    text-shadow: var(--popup-shadow-p);
+}
+
+.popup-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-text);;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.popup-close:hover {
+    transform: scale(1.1);
+    color: var(--color-text);;;
+}
+
+/* -------------9e) AboutMe page Responsive breakpoints ------------- */
+
+
+@media (max-width: 1800px) {
+    
+    .about-page .page-cube, .about-cube {
+        max-width: 900px;
+        width: 95vw;
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        margin-top: 2.5rem;
+    }
+
+    
+    .about-page .tree-left {
+        left: -11vw; 
+    }
+    
+    .about-page .tree-right {
+        right: -11vw;
+    }
+}
+
+@media (max-width: 1600px) {
+    .about-page .page-cube, .about-cube {
+        max-width: 800px;
+        width: 95vw;
+        padding: clamp(1rem, 3vw, 2rem);
+        margin-top: 2rem;
+    }
+    .about-page .tree-left {
+        left: -150px !important; 
+    }
+    
+    .about-page .tree-right {
+        right: -150px !important; 
+    }
+}
+@media (max-width: 1400px) {
+    .about-page .tree-left, .about-page .tree-right {
+        width: 30vw; 
+        min-width: 160px; 
+        max-width: 500px;
+    }
+    .about-page .tree-left {
+        left: -200px !important; 
+        
+    }
+    
+    .about-page .tree-right {
+        right: -200px !important; 
+        
+    }
+    /* for maintaining overlap trees dont move */
+}
+@media (max-width: 1200px) {
+   
+    .about-page .tree-left {
+        left: -225px !important; 
+        
+    }
+    
+    .about-page .tree-right {
+        right: -225px !important; 
+        
+    }
+}
+@media (max-width: 1000px) {
+    .about-page .tree-left, .about-page .tree-right {
+        width: 25vw; 
+        min-width: 140px; 
+        max-width: 450px;
+    }
+    
+    .about-page .tree-left {
+        left: -250px !important; 
+        /* transform: translateX(-100px) !important; */
+    }
+    
+    .about-page .tree-right {
+        right: -250px !important; 
+        /* transform: translateX(100px) !important; */
+    }
+    /* for maintaining overlap trees dont move */
+} 
+@media (max-width: 900px) {
+    .about-page .page-cube, .about-cube {
+        max-width: 420px;
+        width: 90vw;
+        padding: clamp(0.2rem, 2vw, 0.8rem);
+        margin-top: 1.2rem;
+    }
+    
+
+}
+@media (max-width: 800px) {
+    /* this is just a empty slot because nothing happens lol for debugging */
+}
+@media (max-width: 700px) {
+    
+    .about-page .page-cube,.about-cube{
+        overflow-y: auto !important;
+        max-height: 72vh !important;
+        min-height: 0 !important;
+        height: auto !important;
+        margin: 11vh auto 0 auto !important;
+    }
+    .about-page .page-content{
+        transform: none !important;
+        padding: 0.8rem !important;
+
+    }
+    .about-page .page-section {
+        margin-bottom: 0.8rem !important;
+        transform: none !important;
+        opacity: 1 !important;
+        animation: none !important;
+    }
+    .about-page .page-section:last-child{
+        margin-bottom: 0 !important;
+    }
+    
+
+    
+   
+}
+
+@media (max-width: 600px) {
+    .about-page .page-cube, .about-cube {
+        max-width: 98vw;
+        width: 98vw;
+        padding: clamp(0.1rem, 1vw, 0.5rem);
+        margin-top: 0.5rem;
+    }
+    .about-page .tree-left {
+        left: -400px !important; 
+    }
+    
+    .about-page .tree-right {
+        right: -400px !important; 
+    }
+}
+
+/* ---------------9f) AboutMe page font changes and styling ------------- */
+.abJobDate p{
+    font-size : 0.8rem !important;
+    font-style: italic;
+}
+.abJobLoc p{
+    font-size : 1rem !important;
+    
+}
+.abJobDesc p{
+    display: none !important;
+}
+.abJobDesc li{
+    font-size : .9rem !important;
+    font-style: italic;
+    font-family: Garmond, serif;
+}
+.aboutInfo p{
+    font-family: Garmond, serif;
+    text-align:center;
+    font-style: italic;
+    padding-bottom : 1rem;
+}
+
+.aboutInfo h2{
+    text-align: center;
+    
+}
+.aboutInfo {
+    padding-bottom: 1rem;
+}
+
+
+
+/* --------------10) Repositories page ------------- */
+
+/* -------------10a) Layout and navigation ------------- */
+body.repos-page {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.body.repos-page, .repos-page .main-container {
+    height: 100vh !important;
+    min-height: 100vh;
+    overflow: hidden !important;
+}
+
+.repos-page .parallax-trees{
+    display: flex !important;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    pointer-events: none;
+    justify-content: space-between;
+}
+
+.repos-page .tree-left, .repos-page .tree-right {
+    position: absolute !important;
+    top: 0 !important;
+    width: 30vw !important; 
+    height: 100vh !important; 
+    min-width: 300px !important; 
+    max-width: 50vw !important; 
+    opacity: 1 !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+    transform: scale(1.5) !important;
+    background-position: center !important; 
+    background-repeat: no-repeat !important; 
+    transform-origin: center 30% !important;
+}
+.repos-page .tree-left {
+    left: -100px !important;
+}
+.repos-page .tree-right {
+    right: -100px !important; 
+}
+
+.repos-page .navbar {
+    top: 0 !important;
+    background-color: var(--color-tan-glass);
+    backdrop-filter: blur(10px);
+}
+
+
+.repos-page .main-container {
+    height: 100vh;
+    overflow: hidden;
+
+}
+
+
+.repos-page .page-cube {
+    max-width: 1000px;
+    width: 100%;
+    background: var(--color-tan-glass);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+    margin: 12vh auto 0 auto;
+    backdrop-filter: blur(10px);
+    
+}
+
+/* -------------10b) Grid and cubes ------------- */
+
+.repos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 30px;
+}
+.repos-grid .repos-cube:last-child:nth-child(odd) {
+    grid-column: 1/-1;
+    width:50%;
+    margin:0 auto;
+}
+
+
+.repos-cube {
+    
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+
+    
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 20px;
+    padding: 24px;
+    min-height: 180px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--glass-border);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+
+    position: relative;
+    z-index: 20;
+    overflow: hidden;
+}
+
+.repos-cube::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 0%, var(--repo-cube-bf), transparent 100%);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+    
+}
+
+.repos-cube:nth-child(1) { animation-delay: 0.2s; }
+.repos-cube:nth-child(2) { animation-delay: 0.4s; }
+.repos-cube:nth-child(3) { animation-delay: 0.6s; }
+
+/* .repos-cube:nth-child(4) { animation-delay: 0.8s; } */
+
+
+.repos-cube:hover {
+    transform: translateY(-6px) scale(1.02);
+    background: var(--glass-bg-hover);
+    box-shadow: var(--shadow-heavy);
+}
+
+.repos-cube:active {
+    transform: scale(0.98);
+}
+
+
+.repos-cube:focus-visible {
+    outline: var(--repo-cube-focus);
+    outline-offset: 4px;
+}
+.repos-cube::after {
+    content: "⬇";
+    position: absolute;
+    bottom: 16px;
+    right: 18px;
+
+    font-size: 2rem;
+    opacity: 0;
+    transform: translateY(6px);
+
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+}
+
+.repos-cube:last-child::after {
+    content: "🔗";
+    font-size:1.5rem;
+}
+.repos-cube:hover::after,
+.repos-cube:focus-visible::after {
+    opacity: 0.7;
+    transform: translateY(0);
+}
+
+@media( max-width: 1800px){
+    .repos-page .tree-left {
+        left: -11vw !important; 
+    }
+    .repos-page .tree-right {
+        right: -11vw !important; 
+    }
+}
+@media (max-width: 1600px) {
+    .repos-page .tree-left {
+        left: -150px !important; 
+    }
+    
+    .repos-page .tree-right {
+        right: -150px !important; 
+    }
+}
+@media (max-width: 1400px) {
+    .repos-page .tree-left, .repos-page .tree-right {
+        width: 30vw; 
+        min-width: 160px; 
+        max-width: 500px;
+    }
+    .repos-page .tree-left {
+        left: -200px !important; 
+    }
+    
+    .repos-page .tree-right {
+        right: -200px !important; 
+    }
+}
+@media (max-width: 1200px) {
+    .repos-page .tree-left {
+        left: -250px !important; 
+    }
+    
+    .repos-page .tree-right {
+        right: -250px !important; 
+    }
+}
+@media (max-width: 1000px) {
+    .repos-page .tree-left, .repos-page .tree-right {
+        width: 25vw; 
+        min-width: 140px; 
+        max-width: 450px;
+    }
+    .repos-page .tree-left {
+        left: -300px !important; 
+    }
+    
+    .repos-page .tree-right {
+        right: -300px !important; 
+    }
+}
+
+@media (max-width: 768px) {
+    .repos-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .repos-page .tree-left {
+        left: -350px !important; 
+    }
+    
+    .repos-page .tree-right {
+        right: -350px !important; 
+    }
+}
+@media (max-width: 700px) {
+    .repos-cube {
+        min-height: auto;
+        padding: 20px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .repos-page .page-cube {
+        max-height: 70vh !important;
+        margin: 12vh auto 0 auto !important;
+    }
+    .repos-grid .repos-cube:last-child:nth-child(odd) {
+        grid-column: auto;
+        width: 100%;
+        margin: 0;
+    }
+    .repos-page .tree-left {
+        left: -370px !important; 
+    }
+    
+    .repos-page .tree-right {
+        right: -370px !important; 
+    }
+    
+    
+}
+
+/* -------------10c) Cube content ------------- */
+.page-cube {
+    position: relative;
+    max-height: 80vh;
+    width: 100%;
+
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+    z-index: 20;
+}
+
+.page-content {
+    padding: 24px;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+/* .page-content * {
+    overflow: hidden;
+} */
+.repos-content {
+    position: relative;
+    z-index: 1;
+}
+
+.repos-content h2 {
+    color: var(--color-text);;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.repos-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #121920;;
+    transition: width 0.3s ease;
+}
+
+.repos-cube:hover h2::after {
+    width: 100px;
+}
+
+.repos-content p {
+    font-family: Garmond, serif;
+    font-style: italic;
+    color: var(--color-text-muted);;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+.cursor-track {
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+    width: 4px;
+    background: #ff0000;
+    transform-origin: bottom right;
+    pointer-events: none;
+    z-index: 9999;
+    max-width: 200%;
+    max-height: 200%;
+    overflow: visible;
+    animation: trackRetract 0.5s ease-in-out forwards;
+}
+/* cursor tracking used for animation (tongue) */
+
+
+/* -------------11) Contact Page ------------- */
+
+/* -------------11a) Layout and navbar ------------- */
+
+body.contact-page, .contact-page .main-container {
+    height: 100vh !important;
+    min-height: 100vh;
+    overflow: hidden !important;
+}
+
+.contact-page .navbar {
+    top: 0 !important;
+    background-color: var(--color-tan-glass);
+    backdrop-filter: blur(10px);
+}
+
+                
+
+.contact-page .main-container {
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* -------------12b) Trees ------------- */
+
+.contact-page .parallax-trees {
+    display: flex  !important;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    pointer-events: none;
+    justify-content: space-between;
+    /* align-items: stretch; */
+}
+
+.contact-page .tree-left, .contact-page .tree-right {
+    position: absolute !important;
+    top: 0 !important;
+    width: 30vw !important; 
+    height: 100vh !important; 
+    min-width: 300px !important; 
+    max-width: 50vw !important; 
+    opacity: 1 !important;
+    z-index: 3 !important;
+    pointer-events: none !important;
+    transform: scale(1.5) !important;
+    background-position: center !important; 
+    background-repeat: no-repeat !important; 
+    transform-origin: center 30% !important;
+}
+
+.contact-page .tree-left {
+    left: -100px !important; /* Move back towards center (was -200px) */
+    /* transform: translateZ(-200px) !important;
+    z-index: 100 !important; */
+}
+
+.contact-page .tree-right {
+    right: -100px !important; /* Move back towards center (was -200px) */
+    /* transform: translateZ(-200px) scaleX(-1) !important;
+    z-index: 100 !important; */
+}
+
+/* -------------11c) Content cube and sections ------------- */
+
+
+.contact-page .page-cube{
+    overflow-y: auto !important;
+    max-height: 95vh !important;
+    min-height: 80vh !important;
+    min-width: 300px !important; 
+    width: 90% !important; 
+    margin: 12vh auto 0 auto !important; 
+    padding: 0rem !important;
+}
+/* this is how it sits on the page (the transparent pagecube */
+.contact-page .page-section:hover h2::after {
+    width: 100px;
+}
+
+
+
+
+
+/* -------------11d) contact form ------------- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: var(--color-text);;
+    font-size: 0.95rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    margin-top: 0.4rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 10px;
+    border: var(--contact-form-textA);
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--color-text);;;
+}
+
+.contact-form button {
+    align-self: center;
+    /* margin-top: 1rem; */
+    padding: 0.75rem 2.5rem;
+    border-radius: 999px;
+    border: none;
+    background: var(--color-text);;;
+    color: var(--color-text-light);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.butt_links{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:1.5rem;
+    margin-top: 1rem;
+}
+
+.contact-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--contact-form-butt-h);
+}
+
+.social-links{
+    display: flex;
+    justify-content: center;
+    margin-right: 55px;
+    
+
+}
+.social-icon{
+    width: 48px;
+    height: 44px;
+    
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+}
+.social-icon:hover{
+    transform: scale(0.8);
+    opacity: 0.8;
+}
+
+/* -------------11e) thank you overlay ------------- */
+.thank-you-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-darker);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.thank-you-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.thank-you-box {
+    background: var(--theme-cubes);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: 18px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: var(--shadow-heavy);
+}
+
+.thank-you-box h2 {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-text);;
+}
+
+.thank-you-box p {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);;
+    margin-bottom: 1.5rem;
+}
+
+.thank-you-box button {
+    padding: 0.6rem 2.2rem;
+    border-radius: 999px;
+    border: none;
+    background: var(--color-text);;;
+    color: var(--color-text-light);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.thank-you-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+}
+
+/* -------------11f) Contact page responsive breakpoints ------------- */
+
+@media (max-width: 1800px) {
+    .contact-page .page-cube {
+        max-width: 900px;
+        width: 95vw;
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        margin-top: 2.5rem;
+    }
+
+    .contact-page .tree-left, .contact-page .tree-right {
+        max-width: 900px;
+        width: 95vw;
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        margin-top: 2.5rem;
+    }
+    
+    .contact-page .tree-left {
+        left: -11vw;
+        /* z-index: 100 !important; */
+    }
+    
+    .contact-page .tree-right {
+        right: -11vw;
+        /* z-index: 100 !important; */
+    }
+}
+@media (max-width: 1600px) {
+    .contact-page .page-cube{
+        max-width: 800px;
+        width: 95vw;
+        padding: clamp(1rem, 3vw, 2rem);
+        margin-top: 2rem;
+    }
+    .contact-page .tree-left {
+        left: -150px !important;
+        
+    }
+    
+    .contact-page .tree-right {
+        right: -150px !important;
+        
+    }
+}
+@media (max-width: 1400px) {
+    .contact-page .tree-left, .contact-page .tree-right {
+        width: 30vw; 
+        min-width: 160px; 
+        max-width: 500px;
+    }
+    
+    .contact-page .tree-left {
+        left: -200px;
+        
+    }
+    
+    .contact-page .tree-right {
+        right: -200px !important;
+        
+    }
+}
+@media (max-width: 1200px) {
+    
+
+    .contact-page .tree-left {
+        left: -225px !important; 
+        
+    }
+    
+    .contact-page .tree-right {
+        right: -225px !important; 
+    
+    }
+}
+
+@media (max-width: 1000px) {
+    .contact-page .tree-left, .contact-page .tree-right {
+        width: 25vw; 
+        min-width: 140px; 
+        max-width: 450px;
+    }
+    
+    .contact-page .tree-left {
+        left: -250px !important; 
+        
+    }
+    
+    .contact-page .tree-right {
+        right: -250px !important;
+        
+    }
+}
+@media (max-width: 900px) {
+    .contact-page .page-cube{
+        max-width: 420px;
+        width: 90vw;
+        padding: clamp(0.2rem, 2vw, 0.8rem);
+        margin-top: 1.2rem;
+    }
+}
+@media (max-width: 800px) {
+    
+}
+@media (max-width: 700px) {
+    .contact-page .page-cube{
+        max-height: 80vh !important;
+        min-height: 0 !important;
+        height: auto !important;
+    }
+    .contact-page .page-content{
+        transform: none !important;
+        padding: 0.8rem !important;
+
+    }
+    .contact-page .page-section {
+        margin-bottom: 0.8rem !important;
+        transform: none !important;
+        opacity: 1 !important;
+        animation: none !important;
+    }
+    .contact-page .page-section:last-child{
+        margin-bottom: 0 !important;
+    }
+    .contact-page .contact-form {
+        gap: 0.6rem !important;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    .contact-page .page-cube {
+        max-width: 98vw;
+        width: 98vw;
+        max-height: 80vh;
+        padding: clamp(0.1rem, 1vw, 0.5rem);
+        margin-top: 0.5rem;
+    }
+    .contact-page .tree-left {
+        left: -400px !important; 
+        
+    }
+    
+    .contact-page .tree-right {
+        right: -400px !important;
+    }
+    
+}
+
+/* -------------12) Page Transitions ------------- */
+
+main {
+    position: relative;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    will-change: transform, opacity;
+    min-height: 100vh;
+    transform: translateX(0);
+}
+
+
+
+.animate-in {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* -------------13) Shared styles ------------- */
+
+.page-background {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    padding-top: 6rem; /* Added padding to account for navbar */
+    background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+/* Page cube container - used across all pages except main */
+.page-cube {
+    max-width: 1000px;
+    width: 100%;
+    background: var(--color-tan-glass); /* Changed to tan color with transparency */
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    margin-top: 5rem; /* Added margin to move it down from the top */
+    overflow: visible; /* Changed from visible */
+}
+
+.page-cube.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-content {
+    transform: translateZ(20px);
+}
+
+.page-content h1 {
+    font-size: 3rem;
+    -webkit-text-stroke:1.8px currentColor;
+    color: var(--color-text);;
+    margin-bottom: 2rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 0.8s ease-out 0.3s forwards;
+}
+
+.page-section {
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.page-section:nth-child(2) { animation-delay: 0.4s; }
+.page-section:nth-child(3) { animation-delay: 0.5s; }
+.page-section:nth-child(4) { animation-delay: 0.6s; }
+.page-section:nth-child(5) { animation-delay: 0.7s; }
+.page-section:nth-child(6) { animation-delay: 0.8s; }
+.page-section:nth-child(7) { animation-delay: 0.9s; }
+
+.page-section h2 {
+    color: var(--color-text);;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+
+.page-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--color-text);;;
+    transition: width 0.3s ease;
+}
+
+.page-section:hover h2::after {
+    width: 100px;
+}
+
+.page-section p {
+    color: var(--color-text-muted);;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+
+/* ----------------14) Accessibility and Touch ---------------- */
+
+
+/* --- Touch-friendly navigation --- */
+.nav-links a, .option-link, .popup-close {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+
+/* Ensure page cube has proper positioning */
+.page-cube {
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* ----------------15) Image lightbox-overlay system ---------------- */
+.lightbox-overlay{
+    display:none;
+    position:fixed;
+    inset: 0;
+    background: var(--overlay-dark);
+    backdrop-filter: blur(3px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+}
+.lightbox-overlay.active{
+    display:flex;
+}
+.lightbox-image{
+    max-width: 90vh;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    cursor:default;
+}
+.lightbox-close{
+    position: fixed;
+    top: 20px;
+    right: 28px;
+    color: var(--color-text-light);
+    font-size:36px;
+    cursor:pointer;
+    line-height: 1;
+    user-select: none;
+
+}
+
+
+
+

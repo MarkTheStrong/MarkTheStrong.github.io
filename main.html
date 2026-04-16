@@ -1,0 +1,159 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head> 
+    
+    
+    
+    <!-- this is for transitions between pages -->
+   <script> 
+   (function(){
+    var dir = sessionStorage.getItem('navDirection');
+    if (!dir) return;
+
+    var startX = dir === 'forward' ? '100%' : '-100%';
+    var style  = document.createElement('style');
+    style.id   = '__page-enter-start';
+    style.textContent = [
+        '.parallax-container {',
+        '    transform: translateX(' + startX + ') !important;',
+        '    transition: none !important;',
+        '}',
+        '.main-container {',
+        '    transform: translateX(' + startX + ') !important;',
+        '    transition: none !important;',
+        '}',
+        '.options-list {',
+        '    transform: translateX(' + startX + ') !important;',
+        '    transition: none !important;',
+        '}'
+    ].join('\n');
+    document.head.appendChild(style);
+   })();
+
+   </script>
+
+
+
+
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+    
+    <title>Welcome to My Website</title> 
+    
+    
+    <link rel="icon" href="Images/testing_icon.png"> 
+    <link rel="shortcut icon" href="Images/testing_icon.png"> 
+    <link rel="icon" type="image/x-icon" href="Images/testing_icon.png"> 
+    <link rel="icon" type="image/png" href="Images/testing_icon.png"> 
+    <!-- icons for the tab -->
+    
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+
+
+
+<body> 
+    <nav class="navbar"> 
+        <div class="profpic">
+            
+            <img src="Images/prof-pic.png" alt="Profile Picture" class="zoomable">
+            <span class="profpic-name" data-i18n="name"></span></div>
+        </div> 
+        
+        <ul class="nav-links">
+            <li><a href="main.html" class="active" data-i18n="nav.home"></a></li> 
+            <li><a href="aboutMe.html" data-i18n="nav.about"></a></li>
+            <li><a href="repository.html" data-i18n="nav.repo"></a></li>
+            <li><a href="contactMe.html" data-i18n="nav.contact"></a></li>
+        </ul>
+
+        <!-- mobile menu burger icon -->
+        <div class="burger" id="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+    <!-- mobile menu navigation  -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="main.html" data-i18n="nav.home"></a>
+        <a href="aboutMe.html" data-i18n="nav.about"></a>
+        <a href="repository.html" data-i18n="nav.repo"></a>
+        <a href="contactMe.html" data-i18n="nav.contact"></a>
+    </nav>
+
+    <div class="main-container"> 
+        
+        <!-- ======= parallax effect ======= -->
+        <div class="parallax-container"> 
+            <div class="parallax-bg"></div> 
+            <div class="parallax-trees"> 
+                <div class="tree-left"></div> 
+                <div class="tree-right"></div> 
+            </div>
+            <div class="parallax-decorations"> 
+                <div class="frog"></div> 
+                <div class="mushroom"></div> 
+            </div>
+            <div class="parallax-top-images">
+                <div class="top-star left-star"></div>
+                <div class="top-star center-star"></div> 
+                <div class="top-star right-star"></div> 
+            </div>
+            
+            <!-- =======welcome section====== -->
+            <section class="welcome-section"> 
+                <h1 data-i18n = "main.lTitle"></h1> 
+                <p data-i18n = "main.lScrollIn"></p> 
+                <div class="scroll-indicator" data-i18n="main.lDown"></div> 
+            </section>
+        </div>
+
+        
+        <!-- =======options section====== -->
+        <div class="options-list"> 
+            <div class="options-items"> 
+                <div class="option-item"> 
+                    <a href="aboutMe.html" class="option-link"> 
+                        <div class="option-image"> 
+                            <img src="Images/star.png" alt="About Icon"> 
+                        </div>
+                        <span class="option-text" data-i18n="nav.about"></span> 
+                    </a>
+                </div>
+                <div class="option-item"> 
+                    <a href="repository.html" class="option-link"> 
+                        <div class="option-image"> 
+                            <img src="Images/star.png" alt="reposs Icon"> 
+                        </div>
+                        <span class="option-text" data-i18n="nav.repo"></span> 
+                    </a>
+                </div>
+                <div class="option-item"> 
+                    <a href="contactMe.html" class="option-link"> 
+                        <div class="option-image"> 
+                            <img src="Images/star.png" alt="Contact Icon"> 
+                        </div>
+                        <span class="option-text" data-i18n="nav.contact"></span> 
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- zoomable image section -->
+    <div class="lightbox-overlay" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-image" id="lightbox-image" src="" alt="">
+    </div>
+
+    <script src="content.js"></script>
+    <script src="script.js"></script> 
+
+    
+</body>
+</html> 

@@ -1,0 +1,67 @@
+:root{
+    /* ------------------------main colors */
+    --color-tan: #d5cdbb;
+    /* main page background */
+
+    --color-tan-glass: rgba(213, 205, 187, 0.7);
+    /* navbar and glass panels */
+
+    --color-tan-glass-solid: rgba(213, 205, 187, .97);
+    /* mobile navbar back */
+
+    --color-tan-popup: rgba(213,205,187,0.5);
+    /* popup box background */
+    
+
+    /* ------------------------accents */
+    --color-outline: -1px -1px 0 #000, 
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000, 
+                    1px 1px 0 #000,
+                    -2px 0px 0 #000,
+                    2px 0px 0 #000,
+                    0px -2px 0 #000,
+                    0px 2px 0 #000;
+                    
+    /* ks, hover, buttons,underlines */
+    --color-text-active: #1d2935;
+    /* active nav link */
+
+    --color-nav-text: #4b6681;
+
+    /* ------------------------text colors */
+
+    --color-text: #2c3e50;
+    /* main text */
+    --color-text-muted: #555;
+    /* paragraph text */
+    --color-text-light: white;
+    /* text on background */
+
+    /* -----------------------shadows */
+    --popup-shadow-h:0 1px 2px rgba(0, 0, 0, 0.1);
+    --popup-shadow-p:0 1px 1px rgba(0, 0, 0, 0.1);
+    --shadow-soft:0 2px 5px rgba(0,0,0,0.1);
+    --shadow-card:0 8px 32px rgba(0,0,0,0.2);
+    --shadow-heavy: 0 10px 35px rgba(0,0,0,0.25);
+
+    /* -----------------------glass panels */
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-bg-hover:rgba(255,255,255,0.22);
+
+    /* -----------------------overlays */
+    --overlay-dark: rgba(0,0,0,0.3);
+    
+    --overlay-darker: rgba(0,0,0,0.5);
+
+    --overlay-black-light: rgba(0,0,0,0.1);
+    
+
+    /* -----------------------misc */
+    --theme-cubes: rgba(255, 255, 255, 0.85);
+    --repo-cube-bf: rgba(255, 255, 255, 0.1) 50%;
+    --repo-cube-focus: 2px solid rgba(255, 255, 255, 0.8);
+    --contact-form-textA: 1px solid rgba(0,0,0,0.15);
+    --contact-form-butt-h: 0 6px 18px rgba(52, 152, 219, 0.4);
+}

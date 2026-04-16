@@ -1,0 +1,186 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head> 
+
+    <script> 
+   (function(){
+    var dir = sessionStorage.getItem('navDirection');
+    if (!dir) return;
+
+    var startX = dir === 'forward' ? '100%' : '-100%';
+    var style  = document.createElement('style');
+    style.id   = '__page-enter-start';
+    style.textContent = [
+        '.parallax-container {',
+        '    transform: translateX(' + startX + ') !important;',
+        '    transition: none !important;',
+        '}',
+        '.main-container {',
+        '    transform: translateX(' + startX + ') !important;',
+        '    transition: none !important;',
+        '}',
+        '.options-list {',
+        '    transform: translateX(' + startX + ') !important;',
+        '    transition: none !important;',
+        '}'
+    ].join('\n');
+    document.head.appendChild(style);
+   })();
+
+   </script>
+   <!-- for transitions -->
+    
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <!-- for mobile -->
+
+    <title>Contact Me</title> 
+    
+    <link rel="icon" href="Images/testing_icon.png"> 
+    <link rel="shortcut icon" href="Images/testing_icon.png"> 
+    <link rel="icon" type="image/x-icon" href="Images/testing_icon.png"> 
+    <link rel="icon" type="image/png" href="Images/testing_icon.png"> 
+    <!-- icons for the tab -->
+    
+    
+    <link rel="stylesheet" href="colors.css">
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+
+
+
+
+
+
+<body class="contact-page"> 
+    <!-- menus and profile picture -->
+    <nav class="navbar"> 
+        <div class="profpic">
+            <img src="Images/prof-pic.png" alt="Profile Picture"class="zoomable">
+            <span class="profpic-name" data-i18n="name"></span>
+        </div>
+        
+        
+        <ul class="nav-links">
+            <li><a href="main.html"  data-i18n="nav.home"></a></li> 
+            <li><a href="aboutMe.html" data-i18n="nav.about"></a></li>
+            <li><a href="repository.html" data-i18n="nav.repo"></a></li>
+            <li><a href="contactMe.html" class="active" data-i18n="nav.contact">
+            </a></li>
+        </ul>
+
+        <!-- mobile menu burger icon -->
+        <div class="burger" id="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </nav>
+    <!-- mobile menu navigation  -->
+    <nav class="mobile-nav" id="mobile-nav">
+        <a href="main.html" data-i18n="nav.home"></a>
+        <a href="aboutMe.html" data-i18n="nav.about"></a>
+        <a href="repository.html" data-i18n="nav.repo"></a>
+        <a href="contactMe.html" data-i18n="nav.contact"></a>
+    </nav>
+
+
+    <!-- =======parallax effect (mainly used for background)====== -->
+    <div class="main-container"> 
+        <div class="parallax-container"> 
+            <div class="parallax-bg"></div> 
+            <div class="parallax-trees"> 
+                <div class="tree-left"></div> 
+                <div class="tree-right"></div> 
+            </div>
+            <div class="parallax-decorations"> 
+                <div class="frog"></div> 
+                <div class="mushroom"></div> 
+            </div>
+            <div class="parallax-top-images"> 
+                <div class="top-star left-star"></div>
+                <div class="top-star center-star"></div>
+                <div class="top-star right-star"></div>
+            </div>
+            
+
+
+            <!-- =======main content the form and the cube it sits on====== -->
+            <div class="page-cube animate-in">
+                <div class="page-content">
+                    <h1 data-i18n="contact.lHeader"></h1>
+                    
+                    
+                    <div class="page-section contact-form-section">
+                        <h2 data-i18n="contact.lMessToUser"></h2>
+                    
+                        
+                            
+                        <form
+                            id="contactForm"
+                            class="contact-form"
+
+                            
+                            action="https://formsubmit.co/ajax/mark-vandenbosch@hotmail.com" 
+                            
+                            method="POST"
+                        >
+                        <!-- form submit settings: -->
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="New Contact Form Submission">
+                        <input type="hidden" name="_template" value="table">
+                        
+                        
+                            <label> 
+                                <span data-i18n="contact.lName"></span>
+                                
+                                <input type="text" name="name" required />
+                            </label>
+                    
+                            <label >
+                                <span data-i18n="contact.lEmail"></span>
+                                <input type="email" name="email" required />
+                            </label>
+                            
+                            <label>
+                                <span data-i18n="contact.lMessage"></span>
+                                <textarea name="message" rows="5" required></textarea>
+                            </label>
+                            <div class= "butt_links">
+                                <a href=
+                                "https://www.linkedin.com/in/mark-vandenbosch"
+                                target="_blank" class="social-links">
+                                    <img src="Images/linkedin_logo.png" 
+                                    alt="LinkedIn" class="social-icon">
+                                </a>
+                            <button type="submit" data-i18n="contact.lSubmit"></button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                    
+                    
+                </div>
+                <div id="thankYouOverlay" class="thank-you-overlay">
+                    <div class="thank-you-box">
+                        <h2 data-i18n="contact.lThankHeader"></h2>
+                        <p data-i18n="contact.lThankBody"></p>
+                        <button id="thankYouBtn" data-i18n="contact.lThankButt"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- zoomable image section -->
+    <div class="lightbox-overlay" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img class="lightbox-image" id="lightbox-image" src="" alt="">
+    </div>
+
+    <script src="content.js"></script>
+    
+    <script src="script.js"></script> 
+</body>
+</html> 
