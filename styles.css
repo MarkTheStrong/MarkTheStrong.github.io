@@ -95,6 +95,8 @@ img, .option-image img, .popup-content img {
     top: -100px;
     z-index: 1000;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* all of the webkit stuff is for safari */
     transition: top 0.5s ease;
 }
 /* navbar styling - starts hidden (top) */
@@ -589,6 +591,7 @@ img, .option-image img, .popup-content img {
     min-height: 80vh;
     background: none !important;
     backdrop-filter: blur(0);
+    -webkit-backdrop-filter: blur(0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -773,6 +776,7 @@ img, .option-image img, .popup-content img {
     height: 100vh;
     background-color: var(--color-tan-glass-solid);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 999;
     flex-direction: column;
     align-items: center;
@@ -840,6 +844,7 @@ body.about-page, .about-page .main-container {
     top: 0 !important;
     background-color: var(--color-tan-glass);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .about-page .main-container {
@@ -976,6 +981,7 @@ body.about-page, .about-page .main-container {
     
     background: var(--overlay-dark);
     backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     z-index: 9999;
     opacity: 0;
     visibility: hidden;
@@ -1000,6 +1006,7 @@ body.about-page, .about-page .main-container {
     width: 1000px; 
     max-width: 100%; 
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     box-sizing: border-box;
     
     transform: translate(-50%, -50%) !important;
@@ -1277,6 +1284,7 @@ body.repos-page {
     top: 0 !important;
     background-color: var(--color-tan-glass);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 
@@ -1301,6 +1309,7 @@ body.repos-page {
     transition: all 0.8s ease;
     margin: 12vh auto 0 auto;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     
 }
 
@@ -1603,6 +1612,7 @@ body.contact-page, .contact-page .main-container {
     top: 0 !important;
     background-color: var(--color-tan-glass);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
                 
@@ -1764,6 +1774,7 @@ body.contact-page, .contact-page .main-container {
     inset: 0;
     background: var(--overlay-darker);
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2016,6 +2027,7 @@ main {
     transition: all 0.8s ease;
     margin: 0 auto;
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     margin-top: 5rem; /* Added margin to move it down from the top */
     overflow: visible; /* Changed from visible */
 }
@@ -2110,6 +2122,7 @@ main {
     inset: 0;
     background: var(--overlay-dark);
     backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     z-index: 9999;
     justify-content: center;
     align-items: center;
